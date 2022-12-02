@@ -1,0 +1,19 @@
+.header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header>a{
+    text-transform: uppercase;
+    text-decoration: wavy;
+    color: #000;
+    font-size: 25px;
+    
+}
+
+.header-buttons{
+    display: flex;
+    gap: 15px;
+}
