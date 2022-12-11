@@ -18,3 +18,13 @@
     display: flex;
     gap: 15px;
 }
+
+@media (max-width: 525px) {
+    .footer{
+        align-items: center;
+    }
+
+    .footer span{
+        flex-direction: column;
+    }
+}

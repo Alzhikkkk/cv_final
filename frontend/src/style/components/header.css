@@ -17,3 +17,18 @@
     display: flex;
     gap: 15px;
 }
+
+.menu{
+    display: none;
+    width: 25px;
+    height: 25px;
+}
+@media (max-width: 525px) {
+    .menu{
+        display: block;
+    }
+
+    .header-buttons{
+        display: none;
+    }
+}

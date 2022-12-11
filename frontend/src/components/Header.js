@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import menu from '../assets/menu.png';
 
 export const Button = styled.button`
     width:100px;
@@ -32,6 +33,7 @@ function Header(){
                   <Button>Login</Button>
                   <Button>Register</Button>
               </span>
+              <img src={menu} className="menu" alt="Menu"/>
         </header>
      )
 }
