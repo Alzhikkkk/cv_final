@@ -1,96 +1,133 @@
 .about{
     display: flex;
-    justify-content: center;
-    gap: 100px;
+    flex-direction: column;
+    background-color: black;
+    gap: 50px;
 }
 
-.about-site{
+.about-team{
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    justify-content: space-between;
+    height: 500px;
+}
+
+.about-team--img{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.about-team--img h5{
+    font-family: 'Sree Krushnadevaraya';
+    font-style: normal;
+    font-weight: 400;
+    color: #fff;
+    font-size: 40px;
+}
+
+.about-team--title{
+    width: 50%;
+}
+
+.about-team--title h1{
+    font-family: 'Ruda';
+    font-style: normal;
+    color: #fff;
+    font-weight: 700;
+    font-size: 75px;
+    line-height: 85px;
+}
+
+.about-team--img{
+    display: flex;
+
+}
+
+.about-team--img img{
     width: 30%;
 }
 
-.about-site h1{
-    font-size: 70px;
-    font-weight: 600;
-    color: #373737;
-}
-
-.about-site p{
-    font-size: 25px;
-}
-
-.about-img{
+.about-work{
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 30%;
-    border: 5px solid #373737;
+    gap: 35px;
 }
 
-.about-img img{
-    width: 70%;
+.about-work a{
+    height: 70px;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 10px 25px;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Ruda';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.5rem;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
 }
 
 
-@media (max-width: 1211px) {
-    .about-site h1{
-        font-size: 40px;
-    }
+.about-work a:last-child>img{
+    height: 30px;
+}
 
-    .about-site p{
+@media (max-width: 959px) {
+    .about-work a{
         font-size: 20px;
     }
 }
 
-@media (max-width: 780px) {
-
-    .about-img{
-        width: 40%;
-    }
-    .about-site h1{
-        font-size: 25px;
-    }
-
-    .about-site p{
-        font-size: 15px;
-    }
-}
-
-@media (max-width: 545px) {
-    .main{
-        display: flex;
+@media (max-width: 646px) {
+    .about-team--img{
         flex-direction: column;
-        align-items: center;
-    }
-
-    .about-site h1{
-        font-size: 37px;
-    }
-
-    .about-site p{
-        font-size: 25px;
-    }
-
-    .about-site{
-        width: 50%;
-    }
-
-    .about{
-        flex-direction: column-reverse;
-        justify-content: center;
-        align-items: center;
         gap: 50px;
     }
 
-    .about-img{
-        width: 60%;
-        padding: 15px 0px;
-        box-sizing: border-box;
+    .about-team--img img{
+        width: 50%;
     }
 
-    .about-img img{
-        width: 35%;
+    .about-team--title h1{
+        font-size: 50px;
+        line-height: 50px;
+    }
+
+    .about-work{
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+}
+
+@media (max-width: 646px) {
+    .about-team--img{
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    .about-team--img img{
+        width: 50%;
+    }
+
+    .about-team--title h1{
+        font-size: 50px;
+        line-height: 50px;
+    }
+
+    .about-work{
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+}
+
+@media (max-width: 383px) {
+    .about-work a{
+        font-size: 12px;
     }
 }

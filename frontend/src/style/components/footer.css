@@ -1,7 +1,11 @@
 .footer{
+    width: 100%;
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
-    background-color: #373737;
+    background-color: transparent;
+    border: 1px solid #fff;
+    margin-top: 50px;
 }
 
 .footer a{

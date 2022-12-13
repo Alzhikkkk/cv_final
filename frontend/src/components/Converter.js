@@ -1,15 +1,16 @@
-import vector from "../assets/Vector.svg"
-import { Button } from "./Header";
-import {useRef, useState, useEffect} from 'react';
+import {useState} from 'react';
+import range from "../assets/Range.svg";
 import Tesseract  from "tesseract.js";
 import { saveAs } from "file-saver";
 import { Document, Packer, Paragraph, TextRun } from 'docx';
+import kaz from "../assets/kaz.svg"
+import eng from "../assets/eng.svg"
+import rus from "../assets/rus.svg"
 import { Select } from 'antd';
+import Footer from './Footer';
 
 
-const onSearch = (value) => {
-  console.log('search:', value);
-};
+
 
 function Converter(){
     const [file, setFile] = useState();
@@ -69,51 +70,58 @@ function Converter(){
       };
     return(
         <section className="converter container">
+          <div className='converter-all'>
              <div className="converter-place">
-                <img src={vector} alt="Vector" />
-                <h3>Choose your file</h3>
+                 <img src={range} Alt=""/>
+                <h3>Choose & Dropyour file</h3>
                 <input type="file" name="file" onChange={onFileChange} />
                 <a>Browse</a>
              </div>
-             <div className="converter-result">
-                <Button onClick={processImage}>Convert</Button>
-                <div>
-                    <progress value={progress} max={1} />
-                </div>
 
+             <div className="converter-result">
+                <div className='converter-result--button'>
                 <Select
-                    className="select-lang"
                     showSearch
                     placeholder="Select a person"
                     optionFilterProp="children"
                     onChange={onChange}
-                    onSearch={onSearch}
                     filterOption={(input, option) =>
                       (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                     }
                     options={[
-                      {
-                        value: 'kaz',
-                        label: 'Kazakh',
-                      },
                       {
                         value: 'rus',
                         label: 'Russian',
                       },
                       {
                         value: 'eng',
-                        label: 'English'
+                        label: 'English',
+                      },
+                      {
+                        value: 'kaz',
+                        label: 'Kazakh',
                       },
                     ]}
-                  />
+                   />
+                    <button onClick={processImage}>Convert</button>
+                </div>
+               
                 
-                {result !== "" && (
+                
                     
                     <div style={{ marginTop: 20, fontSize: 24, color: "#000"}} className="result-item">
-                    Result: {result}
+                       <p>Result</p>
+                        {result !== "" && (
+      
+                            <p className='result-item--text'>{result}</p>
+                        
+                        )}
                     </div>
-                )}
+                
             </div>
+            </div>
+
+            <Footer></Footer>
         </section>
     )
 }
