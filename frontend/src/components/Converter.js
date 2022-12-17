@@ -1,28 +1,63 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import range from "../assets/Range.svg";
 import Tesseract  from "tesseract.js";
 import { saveAs } from "file-saver";
 import { Document, Packer, Paragraph, TextRun } from 'docx';
-import kaz from "../assets/kaz.svg"
-import eng from "../assets/eng.svg"
-import rus from "../assets/rus.svg"
-import { Select } from 'antd';
+import { Select} from 'antd';
 import Footer from './Footer';
+import axios, { AxiosError } from 'axios'
+
+const { Option } = Select;
 
 
 
 
 function Converter(){
     const [file, setFile] = useState();
-    const [progress, setProgress] = useState(0);
     const [language, setLanguage] = useState("eng");
+    const [selectedLanguageKey, setLanguageKey] = useState('')
     const [result, setResult] = useState("");
-
+    const [languagesList, setLanguagesList] = useState([])
     const onChange = (value) => {
       setLanguage(value)
     };
-    
 
+    const onChangeLanguage = (value) => {
+      setLanguageKey(value)
+    };
+    
+    
+    useEffect(() => {
+      const fetchData = async () => {
+        const data = await axios.get(`https://libretranslate.de/languages`)
+          .then((response) => {
+              setLanguagesList(response.data)
+          })
+      }
+      
+      fetchData().catch(console.error)
+    }, [])
+
+  const translateText = async (text, detectLanguageKey, selectedLanguageKey) => {
+    let data = {
+        q : text,
+        source: detectLanguageKey==='eng'? 'en': detectLanguageKey==='rus'? 'ru': "",
+        target: selectedLanguageKey
+    }
+    await axios.post(`https://libretranslate.de/translate`, data)
+    .then((response) => {
+        setResult(response.data.translatedText)
+    }).catch(err =>{
+      setResult(text)
+      generateDocx(text)
+    })
+}
+
+
+    useEffect(()=>{
+        generateDocx(result)
+    }, [result])
+   
     const generateDocx = async (text) => {
         const doc = new Document({
           sections: [
@@ -51,21 +86,19 @@ function Converter(){
 
     const onFileChange = (e) => {
         setFile(e.target.files[0]);
+        console.log(languagesList)
     };
    
     const processImage = () => {
         setResult("");
-        setProgress(0);
         Tesseract.recognize(file, language, {
           logger: (m) => {
             if (m.status === "recognizing text") {
-              setProgress(m.progress);
+              
             }
           },
         }).then(({ data: { text } }) => {
-          setResult(text);
-          generateDocx(text);
-
+            translateText(text, language, selectedLanguageKey )
         });
       };
     return(
@@ -103,6 +136,18 @@ function Converter(){
                       },
                     ]}
                    />
+
+              <Select
+                    showSearch
+                    placeholder="Select a language"
+                    optionFilterProp="children"
+                    onChange={onChangeLanguage}
+                    filterOption={(input, option) =>
+                      (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                    }
+                    >
+                    {languagesList.map(item => <Option value={item.code} key={item.code}>{item.name}</Option>)}
+                   </Select>
                     <button onClick={processImage}>Convert</button>
                 </div>
                
@@ -111,7 +156,8 @@ function Converter(){
                     
                     <div style={{ marginTop: 20, fontSize: 24, color: "#000"}} className="result-item">
                        <p>Result</p>
-                        {result !== "" && (
+                        {result !== "" && 
+                        (
       
                             <p className='result-item--text'>{result}</p>
                         

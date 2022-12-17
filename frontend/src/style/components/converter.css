@@ -131,6 +131,10 @@
     width: 150px;
 }
 
+:where(.css-dev-only-do-not-override-1i536d8).ant-select-single.ant-select-show-arrow .ant-select-selection-item, :where(.css-dev-only-do-not-override-1i536d8).ant-select-single.ant-select-show-arrow .ant-select-selection-placeholder {
+    color: #fff;
+}
+
 @media (max-width:959px) {
     .converter-all{
         flex-direction: column;
