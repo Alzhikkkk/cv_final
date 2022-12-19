@@ -17,7 +17,7 @@ function About(){
 
              <div className='about-work'>
                   <a href="">Let's start making conversion</a>
-                  <a href="">Watch latest video about how our conversion works  <img src={youtube} alt="YouTube"/></a>
+                  <a href="https://youtu.be/XfrDpwC7RwA">Watch latest video about how our conversion works  <img src={youtube} alt="YouTube"/></a>
              </div>
         </section>
     )
